@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Distributions - Tu puerta al mundo Open Source</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0a0e27;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Fondo animado con partículas */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 90% 10%, rgba(59, 130, 246, 0.2) 0%, transparent 50%);
+            animation: moveBackground 20s ease infinite;
+            z-index: 0;
+        }
+
+        @keyframes moveBackground {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Información del autor - Diseño mejorado */
+        .author-info {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 25px 30px;
+            border-radius: 20px;
+            box-shadow: 
+                0 0 0 1px rgba(99, 102, 241, 0.2),
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .author-info:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 0 0 1px rgba(99, 102, 241, 0.4),
+                0 30px 80px rgba(99, 102, 241, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .author-info h3 {
+            color: #e0e7ff;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .author-info .name {
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .author-info .section {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            display: inline-block;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 80px 20px 60px;
+            animation: fadeInDown 1.2s ease;
+        }
+
+        .logo-container {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .linux-logo {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 30px;
+            box-shadow: 
+                0 0 0 1px rgba(139, 92, 246, 0.2),
+                0 20px 60px rgba(99, 102, 241, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 4s ease-in-out infinite;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .linux-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.5));
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+            75% {
+                transform: translateY(-5px) rotate(-2deg);
+            }
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 50%, #c7d2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .distros-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+            padding: 60px 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1200px) {
+            .distros-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .distro-card {
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 
+                0 0 0 1px rgba(99, 102, 241, 0.1),
+                0 20px 60px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.8s ease;
+            animation-fill-mode: both;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        .distro-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .distro-card:hover::before {
+            left: 100%;
+        }
+
+        .distro-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+            border-radius: 30px 30px 0 0;
+        }
+
+        .distro-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .distro-card:nth-child(1) { animation-delay: 0.1s; }
+        .distro-card:nth-child(2) { animation-delay: 0.2s; }
+        .distro-card:nth-child(3) { animation-delay: 0.3s; }
+        .distro-card:nth-child(4) { animation-delay: 0.4s; }
+        .distro-card:nth-child(5) { animation-delay: 0.5s; }
+        .distro-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .distro-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 
+                0 0 0 1px rgba(99, 102, 241, 0.3),
+                0 30px 80px rgba(99, 102, 241, 0.4);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .distro-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .distro-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 12px;
+            box-shadow: 
+                0 0 0 1px rgba(139, 92, 246, 0.2),
+                0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .distro-card:hover .distro-icon {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 
+                0 0 0 1px rgba(139, 92, 246, 0.4),
+                0 12px 35px rgba(99, 102, 241, 0.4);
+        }
+
+        .distro-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(1.1);
+        }
+
+        /* Fallback para imágenes que no cargan */
+        .distro-icon {
+            position: relative;
+        }
+
+        .distro-icon::after {
+            content: '🐧';
+            position: absolute;
+            font-size: 40px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .distro-icon img[src=""] + ::after,
+        .distro-icon img:not([src]) + ::after {
+            opacity: 1;
+        }
+
+        .distro-name {
+            font-size: 2.2em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .distro-description {
+            color: #94a3b8;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-size: 1.05em;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 18px 35px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1.05em;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 0 0 1px rgba(139, 92, 246, 0.5),
+                0 10px 30px rgba(99, 102, 241, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 0 0 1px rgba(139, 92, 246, 0.7),
+                0 15px 40px rgba(99, 102, 241, 0.6);
+        }
+
+        .download-btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            padding: 60px 20px 120px;
+        }
+
+        footer p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        footer p:first-child {
+            color: #e0e7ff;
+            font-weight: 600;
+            font-size: 1.2em;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Efecto de brillo en el fondo */
+        .glow-effect {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .glow-1 {
+            background: #6366f1;
+            top: -200px;
+            left: -200px;
+            animation: glow1 15s ease-in-out infinite;
+        }
+
+        .glow-2 {
+            background: #8b5cf6;
+            bottom: -200px;
+            right: -200px;
+            animation: glow2 20s ease-in-out infinite;
+        }
+
+        @keyframes glow1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(100px, 100px); }
+        }
+
+        @keyframes glow2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-100px, -100px); }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .linux-logo {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .distros-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 40px 20px;
+            }
+
+            .distro-card {
+                padding: 30px;
+            }
+
+            .author-info {
+                position: static;
+                margin: 20px auto;
+                max-width: 90%;
+                bottom: auto;
+                right: auto;
+            }
+
+            footer {
+                padding-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .author-info {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Efectos de brillo de fondo -->
+    <div class="glow-effect glow-1"></div>
+    <div class="glow-effect glow-2"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="linux-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/240px-Tux.svg.png" alt="Linux Tux">
+                </div>
+            </div>
+            <h1>🐧 Linux Distributions</h1>
+            <p class="subtitle">Descubre el poder del código abierto - Elige tu distribución perfecta y comienza tu viaje en el mundo Linux</p>
+        </header>
+
+        <div class="distros-grid">
+            <div class="distro-card">
+                <div class="distro-header">
+                    <div class="distro-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo-ubuntu_cof-orange-hex.svg/240px-Logo-ubuntu_cof-orange-hex.svg.png" alt="Ubuntu">
+                    </div>
+                    <div class="distro-name">Ubuntu</div>
+                </div>
+                <p class="distro-description">
+                    La distribución más popular y amigable para principiantes. Perfecta para usuarios que vienen de Windows o Mac. Con soporte LTS y una gran comunidad global que te ayudará en cada paso.
+                </p>
+                <a href="https://ubuntu.com/download/desktop" class="download-btn" target="_blank">
+                    <span>⬇️</span>
+                    <span>Descargar Ubuntu</span>
+                </a>
+            </div>
+
+            <div class="distro-card">
+                <div class="distro-header">
+                    <div class="distro-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Fedora_icon_%282021%29.svg/240px-Fedora_icon_%282021%29.svg.png" alt="Fedora">
+                    </div>
+                    <div class="distro-name">Fedora</div>
+                </div>
+                <p class="distro-description">
+                    Innovadora y de vanguardia, respaldada por Red Hat. Ideal para desarrolladores y usuarios que quieren las últimas tecnologías y actualizaciones constantes. El laboratorio de innovación de Linux.
+                </p>
+                <a href="https://fedoraproject.org/workstation/download" class="download-btn" target="_blank">
+                    <span>⬇️</span>
+                    <span>Descargar Fedora</span>
+                </a>
+            </div>
+
+            <div class="distro-card">
+                <div class="distro-header">
+                    <div class="distro-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Debian-OpenLogo.svg/240px-Debian-OpenLogo.svg.png" alt="Debian">
+                    </div>
+                    <div class="distro-name">Debian</div>
+                </div>
+                <p class="distro-description">
+                    La roca sobre la que se construyen muchas distros. Extremadamente estable y confiable. Perfecta para servidores y usuarios que valoran la estabilidad sobre todo. La base de Ubuntu y muchas más.
+                </p>
+                <a href="https://www.debian.org/distrib/" class="download-btn" target="_blank">
+                    <span>⬇️</span>
+                    <span>Descargar Debian</span>
+                </a>
+            </div>
+
+            <div class="distro-card">
+                <div class="distro-header">
+                    <div class="distro-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Archlinux-icon-crystal-64.svg/800px-Archlinux-icon-crystal-64.svg.png" alt="Arch Linux" onerror="this.src='https://archlinux.org/static/logos/archlinux-icon-crystal-64.svg'">
+                    </div>
+                    <div class="distro-name">Arch Linux</div>
+                </div>
+                <p class="distro-description">
+                    Para usuarios avanzados que quieren control total. Rolling release con las últimas versiones de software. Filosofía KISS: Keep It Simple, Stupid. Construye tu sistema a tu medida desde cero.
+                </p>
+                <a href="https://archlinux.org/download/" class="download-btn" target="_blank">
+                    <span>⬇️</span>
+                    <span>Descargar Arch</span>
+                </a>
+            </div>
+
+            <div class="distro-card">
+                <div class="distro-header">
+                    <div class="distro-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Linux_Mint_logo_without_wordmark.svg/240px-Linux_Mint_logo_without_wordmark.svg.png" alt="Linux Mint">
+                    </div>
+                    <div class="distro-name">Linux Mint</div>
+                </div>
+                <p class="distro-description">
+                    Elegante y fácil de usar, basada en Ubuntu. Excelente para principiantes que buscan una experiencia similar a Windows con el escritorio Cinnamon. Diseñada para ser cómoda desde el primer momento.
+                </p>
+                <a href="https://linuxmint.com/download.php" class="download-btn" target="_blank">
+                    <span>⬇️</span>
+                    <span>Descargar Mint</span>
+                </a>
+            </div>
+
+            <div class="distro-card">
+                <div class="distro-header">
+                    <div class="distro-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Manjaro-logo.svg/240px-Manjaro-logo.svg.png" alt="Manjaro">
+                    </div>
+                    <div class="distro-name">Manjaro</div>
+                </div>
+                <p class="distro-description">
+                    Basada en Arch pero más accesible. Rolling release con instalación fácil. Perfecto balance entre actualidad y facilidad de uso para usuarios intermedios que quieren lo mejor de Arch sin complicaciones.
+                </p>
+                <a href="https://manjaro.org/download/" class="download-btn" target="_blank">
+                    <span>⬇️</span>
+                    <span>Descargar Manjaro</span>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p>🐧 Todas las distribuciones de Linux son gratuitas y de código abierto</p>
+            <p>Elige la que mejor se adapte a tus necesidades y únete a millones de usuarios en todo el mundo</p>
+            <p>💻 Software libre • Comunidad global • Posibilidades infinitas</p>
+        </footer>
+    </div>
+
+    <!-- Información del autor -->
+    <div class="author-info">
+        <h3>👨‍💻 Creado por</h3>
+        <div class="name">Danilo Eduardo Zaldaña Martinez</div>
+        <p style="color: #cbd5e1; font-size: 0.95em; margin: 8px 0;">Lista #45 • Segundo Año de Software</p>
+        <span class="section">Sección 2-13</span>
+    </div>
+</body>
+</html>
